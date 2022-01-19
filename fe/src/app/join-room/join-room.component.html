@@ -1,4 +1,4 @@
-<mat-grid-list cols="4" rowHeight="2:1">
+<mat-grid-list cols="4" rowHeight="400px">
     <mat-grid-tile
         colspan="1"
         rowspan="1">
@@ -7,19 +7,35 @@
     <mat-grid-tile
         colspan="2"
         rowspan="1">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Join a room now!</mat-card-title>
-            </mat-card-header>
+        <form submit="() => alert('submitted');">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Join a room now!</mat-card-title>
+                </mat-card-header>
 
-            <mat-card-content>
-                TODO
-            </mat-card-content>
+                <mat-card-content>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input matInput placeholder="jdoe">
+                            <mat-icon matSuffix>account_circle</mat-icon>
+                        </mat-form-field>
+                    </p>
 
-            <mat-card-actions>
-                <button mat-flat-button color="primary">Join</button>
-            </mat-card-actions>
-        </mat-card>
+                    <p>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Room Key</mat-label>
+                            <input matInput placeholder="my-room-key">
+                            <mat-icon matSuffix>lock</mat-icon>
+                        </mat-form-field>
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-flat-button id="join-room" color="primary"><mat-icon>send</mat-icon> Join</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
     </mat-grid-tile>
 
     <mat-grid-tile
