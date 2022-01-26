@@ -5,7 +5,7 @@ services:
       context: "be/"
       dockerfile: Dockerfile
     networks:
-      - axum_spa_network
+      - default
     ports:
       - "8080:8080"
 
@@ -14,10 +14,10 @@ services:
       context: "fe/"
       dockerfile: Dockerfile
     networks:
-      - axum_spa_network
+      - default
     ports:
       - "80:80"
 
 networks:
-  axum_spa_network:
+  default:
     driver: bridge
