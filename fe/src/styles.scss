@@ -46,18 +46,18 @@ $theme-warn: mat-palette($mat-yellow);
 
 .dialog-bg-success {
     mat-dialog-container {
-        background-color: mat-color($theme-success, 0.5); 
+        background-color: mat-color($theme-success, 0.75); 
     }
 }
 
 .dialog-bg-error {
     mat-dialog-container {
-        background-color: mat-color($theme-error, 0.5); 
+        background-color: mat-color($theme-error, 0.75); 
     }
 }
 
 .dialog-bg-warn {
     mat-dialog-container {
-        background-color: mat-color($theme-warn, 0.5); 
+        background-color: mat-color($theme-warn, 0.75); 
     }
 }

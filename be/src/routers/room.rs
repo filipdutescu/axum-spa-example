@@ -4,13 +4,16 @@ use std::{
     sync::{Arc, Mutex},
 };
 
-use axum::{extract::Form, routing::post};
+use axum::{extract, response::IntoResponse, routing::post, Json};
 use axum_debug::debug_handler;
 use serde::{Deserialize, Serialize};
+
+use crate::resp::Response;
 
 use super::Router;
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct JoinRoomData {
     pub username: String,
     pub room_key: String,
@@ -40,8 +43,14 @@ impl RoomRouter {
     }
 
     #[debug_handler()]
-    async fn join_handler(Form(join_room_data): Form<JoinRoomData>) {
-        println!("{join_room_data}")
+    async fn join_handler(
+        extract::Json(join_room_data): extract::Json<JoinRoomData>,
+    ) -> impl IntoResponse {
+        tracing::debug!("Received: {}", join_room_data);
+        Json(Response {
+            code: 0,
+            message: "OK".to_string(),
+        })
     }
 }
 

@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
 import { NotificationDialog } from '../notification/notification.dialog';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-join-room',
@@ -31,7 +32,7 @@ export class JoinRoomComponent {
             Validators.pattern(/^[\w\d-]+$/),
         ]);
 
-    constructor(public dialog: MatDialog) {}
+    constructor(private apiService: ApiService, public dialog: MatDialog) {}
 
     getUsernameErrorMessage() {
         if (this.username.hasError('required')) {
@@ -64,19 +65,36 @@ export class JoinRoomComponent {
     }
 
     onSubmit() {
-        const dialogRef = this.dialog.open(NotificationDialog, {
-            width: '60%',
-            minWidth: '250px',
-            panelClass: 'dialog-bg-success',
-            data: {
-                title: 'Hello World!',
-                content: 'I am working!',
-            }
-        });
+        this.apiService.joinRoom(this.roomKey.value, this.username.value)
+            .subscribe(
+                resp => {
+                    console.log(resp)
+                    const dialogRef = this.dialog.open(NotificationDialog, {
+                        width: '60%',
+                        minWidth: '250px',
+                        panelClass: 'dialog-bg-success',
+                        data: {
+                            title: 'Success',
+                            content: resp.message,
+                        }
+                    });
+                },
+                err => {
+                    console.log(err)
+                    const dialogRef = this.dialog.open(NotificationDialog, {
+                        width: '60%',
+                        minWidth: '250px',
+                        panelClass: 'dialog-bg-error',
+                        data: {
+                            title: 'Error',
+                            content: `<b>Error #${err.code}:</b> ${err.message}`,
+                        }
+                    });
 
-        dialogRef.afterClosed().subscribe(() => {
-            this.username.reset()
-            this.roomKey.reset();
-        });
+                    dialogRef.afterClosed().subscribe(() => {
+                        this.username.reset()
+                        this.roomKey.reset();
+                    });
+                });
     }
 }
