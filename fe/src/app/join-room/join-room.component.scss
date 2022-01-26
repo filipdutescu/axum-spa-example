@@ -1,5 +1,36 @@
+@import "../../styles.scss";
+
+form {
+    display: flex;
+    justify-content: center;
+    padding-top: 35px;
+}
+
+mat-card-content > p {
+    display: flex;
+    justify-content: center;
+}
+
+mat-form-field {
+    width: 75%;
+}
+
+mat-card {
+    width: 60%;
+    @include md-screen {
+        width: 65%;
+    }
+    max-width: 750px;
+    justify-content: center;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: center;
+}
+
 #join-room {
-    width: 100%;
+    width: 75%;
     text-align: center;
     font-weight: bold;
 }

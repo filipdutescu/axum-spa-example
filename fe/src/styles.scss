@@ -9,3 +9,55 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+a {
+    text-decoration: none;
+}
+
+@mixin lg-screen {
+    @media only screen and (max-width: 1170px) {
+        @content;
+    }
+}
+
+@mixin md-screen {
+    @media only screen and (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin sm-screen {
+    @media only screen and (max-width: 767px) {
+        @content;
+    }
+}
+
+@mixin xs-screen {
+    @media only screen and (max-width: 575px) {
+        @content;
+    }
+}
+
+@import "~@angular/material/theming";
+
+$theme-success: mat-palette($mat-green);
+$theme-error: mat-palette($mat-red);
+$theme-warn: mat-palette($mat-yellow);
+
+.dialog-bg-success {
+    mat-dialog-container {
+        background-color: mat-color($theme-success, 0.5); 
+    }
+}
+
+.dialog-bg-error {
+    mat-dialog-container {
+        background-color: mat-color($theme-error, 0.5); 
+    }
+}
+
+.dialog-bg-warn {
+    mat-dialog-container {
+        background-color: mat-color($theme-warn, 0.5); 
+    }
+}
